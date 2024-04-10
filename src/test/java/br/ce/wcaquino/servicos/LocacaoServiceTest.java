@@ -7,6 +7,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import br.ce.wcaquino.entidades.Locacao;
 import br.ce.wcaquino.entidades.Usuario;
 import br.ce.wcaquino.exceptions.FilmeSemEstoqueException;
 import br.ce.wcaquino.exceptions.LocadoraException;
+import br.ce.wcaquino.utils.DataUtils;
 
 public class LocacaoServiceTest {
 
@@ -87,7 +89,6 @@ public class LocacaoServiceTest {
 		filmes.add(new Filme("Filme 1", 1, 4.0));
 		
 		//acao
-		
 		try {
 			service.alugarFilmes(usuario, filmes);
 			Assert.fail();
@@ -155,6 +156,7 @@ public class LocacaoServiceTest {
 		//verificacao
 		assertThat(resultado.getValor(), is(14.0));
 	}
+	
 	@Test
 	public void devePagar0PctNoFilme6() throws FilmeSemEstoqueException, LocadoraException {
 		//cenario
@@ -171,5 +173,19 @@ public class LocacaoServiceTest {
 		
 		//verificacao
 		assertThat(resultado.getValor(), is(14.0));
+	}
+	
+	@Test
+	public void deveDevolverNaSegundaAoAlugarNoSabado() throws FilmeSemEstoqueException, LocadoraException {
+		//cenario
+		Usuario usuario = new Usuario("Usuario");
+		filmes.add(new Filme("Filme 1", 2, 5.0));
+		
+		//acao
+		Locacao retorno = service.alugarFilmes(usuario, filmes);
+		
+		//verificacao
+		boolean ehSegunda = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.MONDAY);
+		Assert.assertTrue(ehSegunda);
 	}
 }
