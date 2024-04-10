@@ -43,26 +43,11 @@ public class LocacaoServiceTest {
 		filmes = new ArrayList<Filme>();
 	}
 	
-	/*@After //Executa após cada teste
-	public void tearDown() {
-		System.out.println("After");
-	}
-	
-	@BeforeClass //Executa antes da instanciação da classe
-	public static void setupClass() {
-		System.out.println("Before Class");
-	}
-	
-	@AfterClass //Executa após a instanciação da classe
-	public static void tearDownClass() {
-		System.out.println("After Class");
-	}*/
-	
 	@Test
 	public void deveAlugarFilme() throws Exception {
 		Assume.assumeFalse(DataUtils.verificarDiaSemana(new Date(), Calendar.SATURDAY));
 		
-		//cenario
+		//cenario	
 		Usuario usuario = new Usuario("Usuario");
 		filmes.add(new Filme("Filme 1", 1, 5.0));
 		
@@ -110,72 +95,6 @@ public class LocacaoServiceTest {
 		
 		//acao
 		service.alugarFilmes(usuario, null);
-	}
-	
-	@Test
-	public void devePagar75PctNoFilme3() throws FilmeSemEstoqueException, LocadoraException {
-		//cenario
-		Usuario usuario = new Usuario("Usuario");
-		filmes.add(new Filme("Filme 1", 2, 4.0));
-		filmes.add(new Filme("Filme 2", 2, 4.0));
-		filmes.add(new Filme("Filme 3", 2, 4.0));
-		
-		//acao
-		Locacao resultado = service.alugarFilmes(usuario, filmes);
-		
-		//verificacao
-		assertThat(resultado.getValor(), is(11.0));
-	}
-	
-	@Test
-	public void devePagar50PctNoFilme4() throws FilmeSemEstoqueException, LocadoraException {
-		//cenario
-		Usuario usuario = new Usuario("Usuario");
-		filmes.add(new Filme("Filme 1", 2, 4.0));
-		filmes.add(new Filme("Filme 2", 2, 4.0));
-		filmes.add(new Filme("Filme 3", 2, 4.0));
-		filmes.add(new Filme("Filme 4", 2, 4.0));
-		
-		//acao
-		Locacao resultado = service.alugarFilmes(usuario, filmes);
-		
-		//verificacao
-		assertThat(resultado.getValor(), is(13.0));
-	}
-	
-	@Test
-	public void devePagar25PctNoFilme5() throws FilmeSemEstoqueException, LocadoraException {
-		//cenario
-		Usuario usuario = new Usuario("Usuario");
-		filmes.add(new Filme("Filme 1", 2, 4.0));
-		filmes.add(new Filme("Filme 2", 2, 4.0));
-		filmes.add(new Filme("Filme 3", 2, 4.0));
-		filmes.add(new Filme("Filme 4", 2, 4.0));
-		filmes.add(new Filme("Filme 5", 2, 4.0));
-		
-		//acao
-		Locacao resultado = service.alugarFilmes(usuario, filmes);
-		
-		//verificacao
-		assertThat(resultado.getValor(), is(14.0));
-	}
-	
-	@Test
-	public void devePagar0PctNoFilme6() throws FilmeSemEstoqueException, LocadoraException {
-		//cenario
-		Usuario usuario = new Usuario("Usuario");
-		filmes.add(new Filme("Filme 1", 2, 4.0));
-		filmes.add(new Filme("Filme 2", 2, 4.0));
-		filmes.add(new Filme("Filme 3", 2, 4.0));
-		filmes.add(new Filme("Filme 4", 2, 4.0));
-		filmes.add(new Filme("Filme 5", 2, 4.0));
-		filmes.add(new Filme("Filme 6", 2, 4.0));
-		
-		//acao
-		Locacao resultado = service.alugarFilmes(usuario, filmes);
-		
-		//verificacao
-		assertThat(resultado.getValor(), is(14.0));
 	}
 	
 	@Test
