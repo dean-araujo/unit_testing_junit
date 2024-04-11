@@ -15,6 +15,12 @@ public class FilmeBuilder {
 		return builder;
 	}
 	
+	public static FilmeBuilder umFilmeSemEstoque() {
+		FilmeBuilder builder = new FilmeBuilder();
+		builder.filme = new Filme("Filme 1", 0, 4.0);
+		return builder;
+	}
+	
 	public FilmeBuilder semEstoque() {
 		filme.setEstoque(0);
 		return this;
