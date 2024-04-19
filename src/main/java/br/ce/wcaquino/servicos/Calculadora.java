@@ -18,5 +18,9 @@ public class Calculadora {
 		}
 		return x / y;
 	}
+	
+	public double dividir(String a, String b) {
+		return Integer.valueOf(a) / Integer.valueOf(b);
+	}
 
 }
